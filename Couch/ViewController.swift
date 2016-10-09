@@ -15,6 +15,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.crudtest()
+        self.restTest()
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,6 +61,40 @@ class ViewController: UIViewController {
         } catch let error as NSError {
             print(error)
         }
+    }
+    
+    func restTest() {
+        
+        do {
+//            let result = try HTTP.GET("http://imoonlightpreprod.elasticbeanstalk.com/user/24123/")
+            let result = try HTTP.GET("http://imoonlightpreprod.elasticbeanstalk.com/guest/job/")
+            result.start({response in
+                guard let code = response.statusCode else {
+                    return
+                }
+                
+                if code == 200 {
+                    let data = response.data;
+                    let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+                    
+                    // cast the resulting json to jobs array
+                    guard let jsa = json as? [Any] else {
+                        return
+                    }
+//                    cast the resulting json to user dictionary
+//                    guard let js = json as? [String: Any] else {
+//                        return
+//                    }
+                    print(jsa);
+                    
+                    
+                
+                }
+            })
+        } catch let error as NSError {
+            print(error)
+        }
+        
     }
 
 

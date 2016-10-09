@@ -10,6 +10,7 @@
 #define Couch_Bridging_Header_h
 
 #import <CouchbaseLite/CouchbaseLite.h>
+#import <SwiftHTTP/SwiftHTTP-umbrella.h>
 
 
 #endif /* Couch_Bridging_Header_h */
